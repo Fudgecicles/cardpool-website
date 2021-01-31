@@ -4,7 +4,8 @@ import "./App.css";
 import Navbar from "react-bootstrap/Navbar";
 import Nav from "react-bootstrap/Nav";
 import { Container } from "react-bootstrap";
-
+import TextField from '@material-ui/core/TextField';
+import Button from '@material-ui/core/Button'
 import landingImage from "./assets/landing.png";
 
 function App() {
@@ -64,7 +65,10 @@ function App() {
           </div>
         </div>
         <div className="Signup-Container">
-          <h1>Test</h1>
+          <TextField margin = "normal" label="Email" variant="filled" className="Email-Input"/>
+          <Button variant = "contained" className="Signup-Button">
+            Sign up
+          </Button>
         </div>
       </div>
     </div>
