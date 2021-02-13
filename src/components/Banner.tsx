@@ -1,7 +1,7 @@
 import React from "react";
 import landingImage from "../assets/landing.png";
 import styled from "styled-components";
-import Container from "./Container";
+import Container from "react-bootstrap/Container";
 import CardStyled from "./CardText";
 import PoolStyled from "./PoolText";
 import LogoText from "./LogoText";
@@ -65,6 +65,12 @@ const Image = styled.img`
   object-fit: scale-down;
 `;
 
+const SignupContainer = styled.div<LayoutProps> `
+  display: flex;
+  width: 100%;
+  justify-content:${(props)=>props.mobile? "center":"left"};
+`;
+
 type LayoutProps = {
   mobile: boolean;
 };
@@ -88,7 +94,10 @@ function Banner() {
               <LogoText></LogoText>
               <br />
               <br />
-              <Signup />
+              <SignupContainer mobile={mobile}>
+                <Signup  displayEmail/>
+              </SignupContainer>
+              
             </BannerText>
           </TextContainer>
           <ImageContainer mobile={mobile}>

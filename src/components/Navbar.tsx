@@ -1,21 +1,23 @@
 import React from "react";
 import NavbarBs from "react-bootstrap/Navbar";
 import Nav from "react-bootstrap/Nav";
-import Container from "./Container";
+import Container from "react-bootstrap/Container";
 import styled from "styled-components";
 import LogoText from "./LogoText";
 import Colors from "../config/Colors";
+import Signup from "./Signup";
 
 const HeaderContainer = styled.div`
   width: 100%;
-  background-color: ${Colors.white};
-  border-bottom-width: 2px;
-  border-bottom-style: solid;
-  border-bottom-color: ${Colors.lightGray};
+  background-color: ${Colors.blue};
 `;
 
 const StyledNavbar = styled(NavbarBs)`
   width: 100%;
+  padding: 2vh 0;
+  display: flex;
+  flex-grow:0;
+  justify-content: space-between;
 `;
 
 const NavigationContainer = styled(Nav)`
@@ -26,11 +28,14 @@ const NavigationContainer = styled(Nav)`
 `;
 
 const NavButton = styled(Nav.Link)`
-  padding-right: 1rem;
-  font-size: 2rem;
+  font-size: 25px;
   font-weight: bold;
   margin-inline: 1rem;
   color: rgb(171, 209, 161);
+`;
+
+const StyledBrand = styled(NavbarBs.Brand)`
+  font-size: 40px;
 `;
 
 function Navbar() {
@@ -38,11 +43,9 @@ function Navbar() {
     <HeaderContainer>
       <Container>
         <StyledNavbar expand="lg">
-          <NavbarBs.Brand>
-            <h1>
+          <StyledBrand>
               <LogoText />
-            </h1>
-          </NavbarBs.Brand>
+          </StyledBrand>
           <NavbarBs.Toggle aria-controls="basic-navbar-nav" />
           <NavbarBs.Collapse id="basic-navbar-nav">
             <NavigationContainer>
@@ -50,6 +53,9 @@ function Navbar() {
               <NavButton>About</NavButton>
               <NavButton>Team</NavButton>
             </NavigationContainer>
+          </NavbarBs.Collapse>
+          <NavbarBs.Collapse id="basic-navbar-nav">
+            <Signup/>
           </NavbarBs.Collapse>
         </StyledNavbar>
       </Container>

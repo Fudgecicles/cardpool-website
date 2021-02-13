@@ -1,4 +1,4 @@
-import React from "react";
+import React, { FunctionComponent } from "react";
 import { StylesProvider } from "@material-ui/core/styles";
 import TextField from "@material-ui/core/TextField";
 import Button from "@material-ui/core/Button";
@@ -10,11 +10,10 @@ const SignupWidth = styled.div`
   align-items: flex-end;
   padding: 0 0 0 0;
   flex-direction: row;
-  width: 300px;
 `;
 
 const StyledTextField = styled(TextField)`
-  width: 100%;
+  width: 400px;
   padding-right: 20px;
   margin: 0 0 0 0;
 `;
@@ -28,16 +27,20 @@ const StyledButton = styled(Button)`
   width: 150px;
 `;
 
-function Signup() {
+type SignupProps = {
+  displayEmail?: boolean
+}
+
+const Signup : FunctionComponent<SignupProps> = (props) => {
   return (
     <SignupWidth>
       <StylesProvider injectFirst>
-        <StyledTextField
+        {props.displayEmail && <StyledTextField
           margin="normal"
           label="Email"
           variant="standard"
           className="Email-Input"
-        />
+        />}
         <StyledButton variant="contained">Sign up</StyledButton>
       </StylesProvider>
     </SignupWidth>
