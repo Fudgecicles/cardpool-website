@@ -10,6 +10,7 @@ import FeatureOne from "./components/static/FeatureOne";
 import FeatureTwo from "./components/static/FeatureTwo";
 import FeatureThree from "./components/static/FeatureThree";
 import Team from "./components/Team";
+import Footer from "./components/Footer";
 
 const FeatureContainer = styled.div`
   background-color: ${Colors.sand};
@@ -40,6 +41,7 @@ function App() {
         </Container>
       </FeatureContainer>
       <Team />
+      <Footer />
     </div>
   );
 }

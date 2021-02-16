@@ -1,27 +1,32 @@
 import React, { FunctionComponent } from "react";
 import styled from "styled-components";
+import useIsMobile from "../hooks/UseIsMobile";
 
 const CardContainer = styled.div<StyleProps>`
   width: 100%;
-  height: 300px;
   display: flex;
   margin-top: 25px;
   margin-bottom: 25px;
   flex-direction: ${(props) =>
-    props.alignment === "left" ? "row" : "row-reverse"};
+    props.mobile
+      ? "column"
+      : props.alignment === "left"
+      ? "row"
+      : "row-reverse"};
   float: ${(props) => props.alignment};
-  text-align: left;
+  text-align: ${(props) => (props.mobile ? "center" : "left")};
+  align-items: center;
 `;
 
-const TextContainer = styled.div`
-  width: 60%;
+const TextContainer = styled.div<LayoutProps>`
+  width: ${(props) => (props.mobile ? "100%" : "60%")};
   display: flex;
   flex-direction: column;
   justify-content: center;
 `;
 
 const ImageContainer = styled.div`
-  width: 40%;
+  width: 300px;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -43,6 +48,11 @@ type FeatureProps = {
 
 type StyleProps = {
   alignment: string;
+  mobile: boolean;
+};
+
+type LayoutProps = {
+  mobile: boolean;
 };
 
 const StyledText = styled.p`
@@ -50,9 +60,11 @@ const StyledText = styled.p`
 `;
 
 const Feature: FunctionComponent<FeatureProps> = (props) => {
+  const mobile = useIsMobile();
+
   return (
-    <CardContainer alignment={props.alignment}>
-      <TextContainer>
+    <CardContainer mobile={mobile} alignment={props.alignment}>
+      <TextContainer mobile={mobile}>
         <h3>{props.header}</h3>
         <StyledText>{props.paragraph}</StyledText>
       </TextContainer>

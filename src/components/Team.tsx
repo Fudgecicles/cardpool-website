@@ -5,8 +5,8 @@ import steven from "../assets/me.jpeg";
 import lain from "../assets/lain.jpg";
 import Colors from "../config/Colors";
 import WaveTop from "./WaveTop";
-import WaveBottom from "./WaveBottom";
 import TeamMember from "./TeamMember";
+import useIsMobile from "../hooks/UseIsMobile";
 
 const CenteredText = styled.h2`
   padding-top: 50px;
@@ -16,22 +16,30 @@ const CenteredText = styled.h2`
 
 const TeamBackground = styled.div`
   background-color: ${Colors.blue};
+  padding-bottom: 50px;
 `;
 
-const TeamLayout = styled.div`
+const TeamLayout = styled.div<LayoutProps>`
   margin-top: 50px;
   display: flex;
-  justify-content: space-evenly;
+  justify-content: space-between;
+  flex-direction: ${(props) => (props.mobile ? "column" : "row")};
 `;
 
+type LayoutProps = {
+  mobile: boolean;
+};
+
 function Team() {
+  const mobile = useIsMobile();
+
   return (
     <>
       <WaveTop></WaveTop>
       <TeamBackground>
         <Container>
           <CenteredText>An award winning team</CenteredText>
-          <TeamLayout>
+          <TeamLayout mobile={mobile}>
             <TeamMember
               borderColor={Colors.card}
               image={steven}
@@ -59,7 +67,6 @@ function Team() {
           </TeamLayout>
         </Container>
       </TeamBackground>
-      <WaveBottom />
     </>
   );
 }
