@@ -1,50 +1,50 @@
 import React, { FunctionComponent } from "react";
 import { StylesProvider } from "@material-ui/core/styles";
-import TextField from "@material-ui/core/TextField";
-import Button from "@material-ui/core/Button";
 import styled from "styled-components";
-import Colors from "../config/Colors";
+import Button from "./Button";
+import useIsMobile from "../hooks/UseIsMobile";
 
-const SignupWidth = styled.div`
+const SignupWidth = styled.div<LayoutProp>`
   display: flex;
   align-items: flex-end;
   padding: 0 0 0 0;
-  flex-direction: row;
+  flex-direction: ${(props) => (props.mobile ? "column" : "row")};
+  justify-content: center;
+  align-items: center;
 `;
 
-const StyledTextField = styled(TextField)`
-  width: 400px;
-  padding-right: 20px;
-  margin: 0 0 0 0;
-`;
-
-const StyledButton = styled(Button)`
-  background-color: #6772e5;
-  &:hover {
-    background-color: #5469d4;
-  }
-  box-shadow: 0 4px 6px rgba(50, 50, 93, 0.11), 0 1px 3px rgba(0, 0, 0, 0.08);
-  width: 150px;
+const StyledTextField = styled.input<LayoutProp>`
+  border-radius: 10px;
+  border-width: 0px;
+  border-style: solid;
+  font-size: 22px;
+  padding: 10px 20px 10px 20px;
+  width: 300px;
+  margin-bottom: ${(props) => (props.mobile ? "15px" : "0")};
+  margin-right: ${(props) => (props.mobile ? "0" : "15px")};
+  outline: none;
 `;
 
 type SignupProps = {
-  displayEmail?: boolean
-}
+  displayEmail?: boolean;
+};
 
-const Signup : FunctionComponent<SignupProps> = (props) => {
+type LayoutProp = {
+  mobile: boolean;
+};
+
+const Signup: FunctionComponent<SignupProps> = (props) => {
+  const mobile = useIsMobile();
   return (
-    <SignupWidth>
+    <SignupWidth mobile={mobile}>
       <StylesProvider injectFirst>
-        {props.displayEmail && <StyledTextField
-          margin="normal"
-          label="Email"
-          variant="standard"
-          className="Email-Input"
-        />}
-        <StyledButton variant="contained">Sign up</StyledButton>
+        {props.displayEmail && (
+          <StyledTextField mobile={mobile} placeholder="Email" />
+        )}
+        <Button>{props.children}</Button>
       </StylesProvider>
     </SignupWidth>
   );
-}
+};
 
 export default Signup;

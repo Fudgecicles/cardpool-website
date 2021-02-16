@@ -8,6 +8,7 @@ import LogoText from "./LogoText";
 import Colors from "../config/Colors";
 import useIsMobile from "../hooks/UseIsMobile";
 import Signup from "./Signup";
+import WaveBottom from "./WaveBottom";
 
 const LandingScreen = styled.div`
   display: flex;
@@ -21,7 +22,7 @@ const TextAndImageContainer = styled.div<LayoutProps>`
   align-items: center;
   justify-content: center;
   align-content: center;
-  padding: 10vh 0 10vh 0;
+  padding: 10vh 0 5vh 0;
   text-align: ${(props) => (props.mobile ? "center" : "left")};
   background-color: ${Colors.blue};
 `;
@@ -42,6 +43,7 @@ const BannerText = styled.h1`
   margin-bottom: 0;
   align-items: center;
   justify-content: center;
+  font-size: 33px;
 `;
 
 const BoldText = styled.span`
@@ -65,10 +67,10 @@ const Image = styled.img`
   object-fit: scale-down;
 `;
 
-const SignupContainer = styled.div<LayoutProps> `
+const SignupContainer = styled.div<LayoutProps>`
   display: flex;
   width: 100%;
-  justify-content:${(props)=>props.mobile? "center":"left"};
+  justify-content: ${(props) => (props.mobile ? "center" : "left")};
 `;
 
 type LayoutProps = {
@@ -87,28 +89,25 @@ function Banner() {
               Spend less time <CardStyled>paying</CardStyled> <br />
               And more time <PoolStyled>playing</PoolStyled> <br />
               <br />
+              {"Instantly "}
               <BoldText>
-                Instantly split payments <br />
-                with
-              </BoldText>{" "}
+                split payments <br />
+              </BoldText>
+              {"with "}
               <LogoText></LogoText>
               <br />
               <br />
               <SignupContainer mobile={mobile}>
-                <Signup  displayEmail/>
+                <Signup displayEmail>Get Started</Signup>
               </SignupContainer>
-              
             </BannerText>
           </TextContainer>
           <ImageContainer mobile={mobile}>
-            <Image
-              src={landingImage}
-              alt="swing"
-              className="Landing-Screen-Image"
-            />
+            <Image src={landingImage} alt="swing" />
           </ImageContainer>
         </TextAndImageContainer>
       </Container>
+      <WaveBottom />
     </LandingScreen>
   );
 }
