@@ -10,7 +10,6 @@ import FeatureOne from "./components/static/FeatureOne";
 import FeatureTwo from "./components/static/FeatureTwo";
 import FeatureThree from "./components/static/FeatureThree";
 import Team from "./components/Team";
-import WaveBottom from "./components/WaveBottom";
 
 const FeatureContainer = styled.div`
   background-color: ${Colors.sand};
@@ -24,6 +23,7 @@ const FeatureContainer = styled.div`
 
 const CenteredText = styled.h2`
   text-align: center;
+  font-weight: bold;
 `;
 
 function App() {

@@ -10,6 +10,7 @@ import WaveBottom from "./WaveBottom";
 const CenteredText = styled.h2`
   padding-top: 50px;
   text-align: center;
+  font-weight: bold;
 `;
 
 const TeamBackground = styled.div`
