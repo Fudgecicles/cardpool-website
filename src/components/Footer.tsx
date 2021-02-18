@@ -2,7 +2,6 @@ import React from "react";
 import { Container } from "react-bootstrap";
 import styled from "styled-components";
 import Colors from "../config/Colors";
-import Button from "./Button";
 import LogoText from "./LogoText";
 
 const Background = styled.div`
@@ -32,18 +31,22 @@ const Links = styled.p`
 `;
 
 function Footer() {
+  const scrollToTop = () => {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  };
+
   return (
     <Background>
       <Container>
         <FooterLayout>
           <Column>
             <h1>
-              <LogoText></LogoText>
+              <LogoText clickable></LogoText>
             </h1>
             <p>Copyright 2021</p>
           </Column>
           <Column>
-            <Links>Sign Up</Links>
+            <Links onClick={scrollToTop}>Sign Up</Links>
             <Links>Get In Contact</Links>
           </Column>
         </FooterLayout>

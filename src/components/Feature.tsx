@@ -63,7 +63,7 @@ const Feature: FunctionComponent<FeatureProps> = (props) => {
   const mobile = useIsMobile();
 
   return (
-    <CardContainer mobile={mobile} alignment={props.alignment}>
+    <CardContainer id="about" mobile={mobile} alignment={props.alignment}>
       <TextContainer mobile={mobile}>
         <h3>{props.header}</h3>
         <StyledText>{props.paragraph}</StyledText>

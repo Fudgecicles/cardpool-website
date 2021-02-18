@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useRef } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./App.css";
 import Navbar from "./components/Navbar";
@@ -28,11 +28,14 @@ const CenteredText = styled.h2`
 `;
 
 function App() {
+  const aboutRef = useRef<HTMLDivElement>();
+  const teamRef = useRef<HTMLDivElement>();
+
   return (
     <div className="App">
-      <Navbar />
+      <Navbar about={aboutRef} team={teamRef} />
       <Banner />
-      <FeatureContainer>
+      <FeatureContainer ref={aboutRef as any} id="about">
         <Container>
           <CenteredText>A modern way to split payments</CenteredText>
           <FeatureOne />
@@ -40,7 +43,7 @@ function App() {
           <FeatureThree />
         </Container>
       </FeatureContainer>
-      <Team />
+      <Team ref={teamRef as any} />
       <Footer />
     </div>
   );

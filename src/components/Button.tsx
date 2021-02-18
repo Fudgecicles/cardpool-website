@@ -25,6 +25,7 @@ type ButtonProps = {
   backgroundColor?: string;
   hoverBackgroundColor?: string;
   marginLeft?: string;
+  onClick?: any;
 };
 
 const Button: FunctionComponent<ButtonProps> = (props) => {
@@ -33,6 +34,7 @@ const Button: FunctionComponent<ButtonProps> = (props) => {
       backgroundColor={props.backgroundColor}
       hoverBackgroundColor={props.hoverBackgroundColor}
       marginLeft={props.marginLeft}
+      onClick={props.onClick}
     >
       {props.children}
     </StyledButton>

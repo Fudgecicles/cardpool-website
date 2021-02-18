@@ -30,13 +30,13 @@ type LayoutProps = {
   mobile: boolean;
 };
 
-function Team() {
+const Team = React.forwardRef<HTMLDivElement>((_props, ref) => {
   const mobile = useIsMobile();
 
   return (
     <>
       <WaveTop></WaveTop>
-      <TeamBackground>
+      <TeamBackground ref={ref}>
         <Container>
           <CenteredText>An award winning team</CenteredText>
           <TeamLayout mobile={mobile}>
@@ -69,6 +69,6 @@ function Team() {
       </TeamBackground>
     </>
   );
-}
+});
 
 export default Team;

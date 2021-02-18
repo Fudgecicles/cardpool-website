@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import react, { FunctionComponent } from "react";
+import { FunctionComponent } from "react";
 
 const MemberImage = styled.img<ColorProp>`
   border-width: 10px;
