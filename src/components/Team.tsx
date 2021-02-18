@@ -7,6 +7,14 @@ import Colors from "../config/Colors";
 import WaveTop from "./WaveTop";
 import TeamMember from "./TeamMember";
 import useIsMobile from "../hooks/UseIsMobile";
+import pax10 from "../assets/logo-pax10.png";
+import imagineCup from "../assets/Imaginecup-logo.png";
+import tacobell from "../assets/tacobell.png";
+import megabooth from "../assets/megabooth.png";
+import dreamhack from "../assets/dreamhack.png";
+import sxsw from "../assets/sxsw.png";
+import bafta from "../assets/bafta.png";
+import gameAwards from "../assets/the-game-awards.png";
 
 const CenteredText = styled.h2`
   padding-top: 50px;
@@ -21,13 +29,35 @@ const TeamBackground = styled.div`
 
 const TeamLayout = styled.div<LayoutProps>`
   margin-top: 50px;
+  margin-bottom: 50px;
   display: flex;
   justify-content: space-between;
   flex-direction: ${(props) => (props.mobile ? "column" : "row")};
 `;
 
+const AwardsLayout = styled.div`
+  margin-top: 50px;
+  margin-bottom: 50px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  flex-wrap: wrap;
+`;
+
+const AwardImage = styled.img<ImageProps>`
+  margin: 20px;
+  padding: ${(props) => props.padding};
+  width: 200px;
+  height: 200px;
+  object-fit: scale-down;
+`;
+
 type LayoutProps = {
   mobile: boolean;
+};
+
+type ImageProps = {
+  padding?: string;
 };
 
 const Team = React.forwardRef<HTMLDivElement>((_props, ref) => {
@@ -48,7 +78,6 @@ const Team = React.forwardRef<HTMLDivElement>((_props, ref) => {
                 <>
                   <h4>University of Southern California </h4>
                   <h4>Sledgehammer Games</h4>
-                  <h4>PAX 10 2015</h4>
                 </>
               }
             />
@@ -60,11 +89,21 @@ const Team = React.forwardRef<HTMLDivElement>((_props, ref) => {
                 <>
                   <h4>University of Southern California </h4>
                   <h4>Pinscreen</h4>
-                  <h4>BAFTA Ones to Watch 2016</h4>
                 </>
               }
             />
           </TeamLayout>
+          <CenteredText>Our work has been featured in:</CenteredText>
+          <AwardsLayout>
+            <AwardImage padding={"25px"} src={pax10} alt="pax 10" />
+            <AwardImage src={imagineCup} alt="imagine cup" />
+            <AwardImage src={tacobell} alt="taco bell" />
+            <AwardImage src={megabooth} alt="indie mega booth" />
+            <AwardImage src={dreamhack} alt="dreamhack" />
+            <AwardImage padding={"20px"} src={sxsw} alt="sxsw" />
+            <AwardImage src={bafta} alt="bafta" />
+            <AwardImage src={gameAwards} alt="the game awards" />
+          </AwardsLayout>
         </Container>
       </TeamBackground>
     </>
