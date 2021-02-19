@@ -22,7 +22,7 @@ const TextAndImageContainer = styled.div<LayoutProps>`
   align-items: center;
   justify-content: center;
   align-content: center;
-  padding: 10vh 0 5vh 0;
+  padding: ${(props) => (props.mobile ? "2vh" : "10vh 0 5vh 0")};
   text-align: ${(props) => (props.mobile ? "center" : "left")};
   background-color: ${Colors.blue};
 `;
@@ -102,9 +102,11 @@ function Banner() {
               </SignupContainer>
             </BannerText>
           </TextContainer>
-          <ImageContainer mobile={mobile}>
-            <Image src={landingImage} alt="swing" />
-          </ImageContainer>
+          {!mobile && (
+            <ImageContainer mobile={mobile}>
+              <Image src={landingImage} alt="swing" />
+            </ImageContainer>
+          )}
         </TextAndImageContainer>
       </Container>
       <WaveBottom />

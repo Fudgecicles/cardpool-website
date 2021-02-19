@@ -9,7 +9,7 @@ function FeatureThree() {
     <Feature
       header={
         <>
-          Use our elegant tools to <br />
+          Utilize elegant tools to <br />
           split costs <CardText>pain</CardText> <PoolText>free</PoolText>
         </>
       }

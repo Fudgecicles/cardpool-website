@@ -30,7 +30,7 @@ const NavigationContainer = styled(Nav)<LayoutProps>`
 
 const StyledCollapse = styled(NavbarBs.Collapse)<LayoutProps>`
   display: flex;
-  justify-content: space-between;
+  justify-content: flex-end;
   align-items: ${(props) => (props.mobile ? "flex-end" : "center")};
   flex-direction: ${(props) => (props.mobile ? "column" : "row")};
 `;
@@ -89,15 +89,6 @@ const Navbar: FunctionComponent<NavbarProps> = (props) => {
                 Team
               </StyledNavButton>
               <NavDropdown.Divider />
-            </NavigationContainer>
-            <NavigationContainer mobile={mobile}>
-              <Button>Sign Up</Button>
-              <Button
-                backgroundColor={Colors.pool}
-                hoverBackgroundColor={Colors.card}
-              >
-                Login
-              </Button>
             </NavigationContainer>
           </StyledCollapse>
         </StyledNavbar>

@@ -20,6 +20,7 @@ const FooterLayout = styled.div`
 const Column = styled.div`
   display: flex;
   flex-direction: column;
+  justify-content: center;
 `;
 
 const Links = styled.p`
