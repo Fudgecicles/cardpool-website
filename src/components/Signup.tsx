@@ -1,8 +1,9 @@
-import React, { FunctionComponent } from "react";
+import React, { FunctionComponent, useState } from "react";
 import { StylesProvider } from "@material-ui/core/styles";
 import styled from "styled-components";
 import Button from "./Button";
 import useIsMobile from "../hooks/UseIsMobile";
+import { useHistory } from "react-router-dom";
 
 const SignupWidth = styled.div<LayoutProp>`
   display: flex;
@@ -34,14 +35,30 @@ type LayoutProp = {
 };
 
 const Signup: FunctionComponent<SignupProps> = (props) => {
+  const history = useHistory();
+  const [email, setEmail] = useState("");
+
+  const navigateToSignup = () => {
+    if (email.length == 0) return;
+    history.push("/signup");
+  };
+
+  const updateText = (text: string) => {
+    setEmail(text);
+  };
+
   const mobile = useIsMobile();
   return (
     <SignupWidth mobile={mobile}>
       <StylesProvider injectFirst>
         {props.displayEmail && (
-          <StyledTextField mobile={mobile} placeholder="Email" />
+          <StyledTextField
+            onChange={(a) => updateText(a.target.value)}
+            mobile={mobile}
+            placeholder="Email"
+          />
         )}
-        <Button>{props.children}</Button>
+        <Button onClick={navigateToSignup}>{props.children}</Button>
       </StylesProvider>
     </SignupWidth>
   );
