@@ -23,11 +23,12 @@ const Column = styled.div`
   justify-content: center;
 `;
 
-const Links = styled.p`
+const Links = styled.a`
   cursor: pointer;
   &&:hover {
     color: white;
   }
+  color: ${Colors.lightGray};
   transition-duration: 0.3s;
 `;
 
@@ -48,7 +49,7 @@ function Footer() {
           </Column>
           <Column>
             <Links onClick={scrollToTop}>Sign Up</Links>
-            <Links>Get In Contact</Links>
+            <Links href="mailto:listeven@alumni.usc.edu">Get In Contact</Links>
           </Column>
         </FooterLayout>
       </Container>
