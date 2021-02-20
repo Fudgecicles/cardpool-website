@@ -5,7 +5,6 @@ import Container from "react-bootstrap/Container";
 import styled from "styled-components";
 import LogoText from "./LogoText";
 import Colors from "../config/Colors";
-import Button from "./Button";
 import useIsMobile from "../hooks/UseIsMobile";
 import { NavDropdown } from "react-bootstrap";
 
@@ -14,7 +13,7 @@ const HeaderContainer = styled.div`
   background-color: ${Colors.blue};
 `;
 
-const StyledNavbar = styled(NavbarBs)<LayoutProps>`
+const StyledNavbar = styled(NavbarBs)`
   width: 100%;
   padding: 1vh 0;
   display: flex;
@@ -25,14 +24,20 @@ const StyledNavbar = styled(NavbarBs)<LayoutProps>`
 const NavigationContainer = styled(Nav)<LayoutProps>`
   display: flex;
   flex-grow: 0;
-  align-items: ${(props) => (props.mobile ? "flex-end" : "center")};
+  align-items: ${(props) => (props.ismobile ? "flex-end" : "center")};
+`;
+
+const NaviationLayout = styled.div<LayoutProps>`
+  display: flex;
+  flex-grow: 0;
+  align-items: ${(props) => (props.ismobile ? "flex-end" : "center")};
 `;
 
 const StyledCollapse = styled(NavbarBs.Collapse)<LayoutProps>`
   display: flex;
   justify-content: flex-end;
-  align-items: ${(props) => (props.mobile ? "flex-end" : "center")};
-  flex-direction: ${(props) => (props.mobile ? "column" : "row")};
+  align-items: ${(props) => (props.ismobile ? "flex-end" : "center")};
+  flex-direction: ${(props) => (props.ismobile ? "column" : "row")};
 `;
 
 const StyledBrand = styled(NavbarBs.Brand)`
@@ -54,7 +59,7 @@ const StyledNavButton = styled(Nav.Link)`
 `;
 
 type LayoutProps = {
-  mobile: boolean;
+  ismobile: boolean;
 };
 
 type NavbarProps = {
@@ -74,21 +79,23 @@ const Navbar: FunctionComponent<NavbarProps> = (props) => {
   return (
     <HeaderContainer>
       <Container>
-        <StyledNavbar mobile={mobile} expand="lg">
+        <StyledNavbar expand="lg">
           <StyledBrand>
             <LogoText clickable />
           </StyledBrand>
           <NavbarBs.Toggle aria-controls="basic-navbar-nav" />
-          <StyledCollapse mobile={mobile} id="basic-navbar-nav">
-            <NavigationContainer mobile={mobile}>
-              <NavDropdown.Divider />
-              <StyledNavButton onClick={() => scrollTo(props.about)}>
-                About
-              </StyledNavButton>
-              <StyledNavButton onClick={() => scrollTo(props.team)}>
-                Team
-              </StyledNavButton>
-              <NavDropdown.Divider />
+          <StyledCollapse ismobile={mobile} id="basic-navbar-nav">
+            <NavigationContainer>
+              <NaviationLayout ismobile={mobile}>
+                <NavDropdown.Divider />
+                <StyledNavButton onClick={() => scrollTo(props.about)}>
+                  About
+                </StyledNavButton>
+                <StyledNavButton onClick={() => scrollTo(props.team)}>
+                  Team
+                </StyledNavButton>
+                <NavDropdown.Divider />
+              </NaviationLayout>
             </NavigationContainer>
           </StyledCollapse>
         </StyledNavbar>
