@@ -43,7 +43,7 @@ const BannerText = styled.h1`
   margin-bottom: 0;
   align-items: center;
   justify-content: center;
-  font-size: 33px;
+  font-size: 40px;
 `;
 
 const BoldText = styled.span`
@@ -98,7 +98,7 @@ function Banner() {
               <br />
               <br />
               <SignupContainer mobile={mobile}>
-                <Signup displayEmail>Get Started</Signup>
+                <Signup displayEmail>Sign Up</Signup>
               </SignupContainer>
             </BannerText>
           </TextContainer>

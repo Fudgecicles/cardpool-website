@@ -27,15 +27,9 @@ const NavigationContainer = styled(Nav)<LayoutProps>`
   align-items: ${(props) => (props.ismobile ? "flex-end" : "center")};
 `;
 
-const NaviationLayout = styled.div<LayoutProps>`
-  display: flex;
-  flex-grow: 0;
-  align-items: ${(props) => (props.ismobile ? "flex-end" : "center")};
-`;
-
 const StyledCollapse = styled(NavbarBs.Collapse)<LayoutProps>`
   display: flex;
-  justify-content: flex-end;
+  justify-content: ${(props) => (props.ismobile ? "" : "flex-end")};
   align-items: ${(props) => (props.ismobile ? "flex-end" : "center")};
   flex-direction: ${(props) => (props.ismobile ? "column" : "row")};
 `;
@@ -86,16 +80,14 @@ const Navbar: FunctionComponent<NavbarProps> = (props) => {
           <NavbarBs.Toggle aria-controls="basic-navbar-nav" />
           <StyledCollapse ismobile={mobile} id="basic-navbar-nav">
             <NavigationContainer>
-              <NaviationLayout ismobile={mobile}>
-                <NavDropdown.Divider />
-                <StyledNavButton onClick={() => scrollTo(props.about)}>
-                  About
-                </StyledNavButton>
-                <StyledNavButton onClick={() => scrollTo(props.team)}>
-                  Team
-                </StyledNavButton>
-                <NavDropdown.Divider />
-              </NaviationLayout>
+              <NavDropdown.Divider />
+              <StyledNavButton onClick={() => scrollTo(props.about)}>
+                About
+              </StyledNavButton>
+              <StyledNavButton onClick={() => scrollTo(props.team)}>
+                Team
+              </StyledNavButton>
+              <NavDropdown.Divider />
             </NavigationContainer>
           </StyledCollapse>
         </StyledNavbar>
