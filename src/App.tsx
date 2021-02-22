@@ -4,8 +4,6 @@ import "./App.css";
 import { BrowserRouter, Switch, Route } from "react-router-dom";
 import LandingScreen from "./screens/LandingScreen";
 import SignupConfirmation from "./screens/SignupConfirmation";
-//@ts-ignore
-import AlertTemplate from "react-alert-template-basic";
 
 import dotenv from "dotenv";
 
