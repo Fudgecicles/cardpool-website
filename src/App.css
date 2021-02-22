@@ -19,6 +19,10 @@
   }
 }
 
+.react-p5 {
+  display: flex;
+}
+
 .Horizontal-Container {
 }
 
