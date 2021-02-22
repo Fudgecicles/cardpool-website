@@ -4,7 +4,7 @@ import styled from "styled-components";
 import steven from "../assets/me.jpeg";
 import lain from "../assets/lain.jpg";
 import Colors from "../config/Colors";
-import WaveTop from "./WaveTop";
+import WaveBox from "./WaveBox";
 import TeamMember from "./TeamMember";
 import useIsMobile from "../hooks/UseIsMobile";
 import pax10 from "../assets/logo-pax10.png";
@@ -65,7 +65,7 @@ const Team = React.forwardRef<HTMLDivElement>((_props, ref) => {
 
   return (
     <>
-      <WaveTop></WaveTop>
+      <WaveBox foreground={Colors.blue} background={Colors.sand}/>
       <TeamBackground ref={ref}>
         <Container>
           <CenteredText>An award winning team</CenteredText>

@@ -8,7 +8,7 @@ import LogoText from "./LogoText";
 import Colors from "../config/Colors";
 import useIsMobile from "../hooks/UseIsMobile";
 import Signup from "./Signup";
-import WaveBottom from "./WaveBottom";
+import WaveBox from "./WaveBox";
 
 const LandingScreen = styled.div`
   display: flex;
@@ -109,7 +109,7 @@ function Banner() {
           )}
         </TextAndImageContainer>
       </Container>
-      <WaveBottom />
+      <WaveBox foreground={Colors.sand} background={Colors.blue}/>
     </LandingScreen>
   );
 }
