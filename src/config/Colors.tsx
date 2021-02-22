@@ -7,6 +7,7 @@ const Colors = {
   blue: "#4a85df",
   darkBlue: "#08306b",
   sand: "rgb(255, 243, 218)",
+  wetSand: "rgb(236, 223, 195)",
 };
 
 export default Colors;

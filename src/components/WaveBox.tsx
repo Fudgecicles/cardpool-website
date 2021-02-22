@@ -5,7 +5,9 @@ import { Color } from "react-bootstrap/esm/types";
 
 interface ComponentProps {
 	//Your component props
+	upright: boolean
 	foreground: string
+	foregroundPrev: string
 	background: string
 }
 
@@ -34,6 +36,35 @@ const WaveBox: React.FC<ComponentProps> = (props: ComponentProps) => {
 		p5.createCanvas(windowWidth, 100).parent(canvasParentRef);
 	};
 
+	const drawWave = (p5: p5Types, currentTime: number) => {
+		let waveX = 0;
+		let currentHeight = (p5.height / 2) + p5.sin(currentTime * 0.001) * (p5.height / 4);
+		p5.beginShape();
+		if(props.upright){
+			p5.vertex(p5.width/2,p5.height);
+			p5.vertex(-10,p5.height);
+			p5.vertex(-10,p5.height/2);
+		}else{
+			p5.vertex(p5.width/2,0);
+			p5.vertex(-10,0);
+			p5.vertex(-10,p5.height/2);
+		}
+		for (let i = 0; i <= n; i++){
+			p5.curveVertex(waveX, currentHeight + ((p5.noise(waveX * 0.0075, currentTime * 0.001) - 0.5) * 50));
+			waveX += p5.width/n;
+		}
+		if(props.upright){
+			p5.vertex(p5.width+10,p5.height/2);
+			p5.vertex(p5.width+10,p5.height);
+			p5.vertex(p5.width/2,p5.height);
+		}else{
+			p5.vertex(p5.width+10,p5.height/2);
+			p5.vertex(p5.width+10,0);
+			p5.vertex(p5.width/2,0);
+		}
+		p5.endShape();
+	}
+
 	const draw = (p5: p5Types) => {
 		// Not sure why but sometimes it doesn't update and this catches that
 		if(windowWidth != window.outerWidth){
@@ -46,24 +77,14 @@ const WaveBox: React.FC<ComponentProps> = (props: ComponentProps) => {
 			setResizeOccurred(false)
 		}
 		//Draw the wave
-		let waveX = 0;
-		let currentHeight = (p5.height / 2) + p5.sin(p5.millis() * 0.001) * (p5.height / 4);
 		p5.background(p5.color(props.background));
-		p5.fill(p5.color(props.foreground));
 		p5.noStroke();
 		p5.noiseDetail(2, 0.2);
-		p5.beginShape();
-		p5.vertex(p5.width/2,p5.height);
-		p5.vertex(-10,p5.height);
-		p5.vertex(-10,p5.height/2);
-		for (let i = 0; i <= n; i++){
-			p5.curveVertex(waveX, currentHeight + ((p5.noise(waveX * 0.0075, p5.millis() * 0.001) - 0.5) * 50));
-			waveX += p5.width/n;
-		}
-		p5.vertex(p5.width+10,p5.height/2);
-		p5.vertex(p5.width+10,p5.height);
-		p5.vertex(p5.width/2,p5.height);
-		p5.endShape();
+		
+		p5.fill(p5.color(props.foregroundPrev));
+		drawWave(p5, p5.millis() - 1000);
+		p5.fill(p5.color(props.foreground));
+		drawWave(p5, p5.millis());
 	};
 
 	return <Sketch setup={setup} draw={draw} />;

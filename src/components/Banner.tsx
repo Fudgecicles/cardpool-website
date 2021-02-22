@@ -109,7 +109,7 @@ function Banner() {
           )}
         </TextAndImageContainer>
       </Container>
-      <WaveBox foreground={Colors.sand} background={Colors.blue}/>
+      <WaveBox upright = {false} foreground={Colors.blue} background={Colors.sand} foregroundPrev={Colors.wetSand}/>
     </LandingScreen>
   );
 }
