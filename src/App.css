@@ -1,7 +1,3 @@
-.App {
-  font-family: "montserrat";
-}
-
 .Landing-Screen-Text {
   padding-right: 3vw;
   font-size: 2vw;
@@ -34,15 +30,6 @@
 
 .Signup-Button {
   margin-left: 6vw;
-}
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
 }
 
 .button {
