@@ -2,6 +2,7 @@ import { FunctionComponent } from "react";
 import styled from "styled-components";
 import CardStyled from "./CardText";
 import PoolStyled from "./PoolText";
+import React from "react";
 
 const ClickableSpan = styled.span<ClickableProps>`
   cursor: ${(props) => (props.clickable ? "pointer" : "auto")};
