@@ -22,7 +22,7 @@ const TextAndImageContainer = styled.div<LayoutProps>`
   align-items: center;
   justify-content: center;
   align-content: center;
-  padding: ${(props) => (props.mobile ? "2vh" : "10vh 0 5vh 0")};
+  padding: ${(props) => (props.mobile ? "2vh" : "15vh 0 15vh 0")};
   text-align: ${(props) => (props.mobile ? "center" : "left")};
   background-color: ${Colors.blue};
 `;
@@ -109,7 +109,12 @@ function Banner() {
           )}
         </TextAndImageContainer>
       </Container>
-      <WaveBox upright = {false} foreground={Colors.blue} background={Colors.sand} foregroundPrev={Colors.wetSand}/>
+      <WaveBox
+        upright={false}
+        foreground={Colors.blue}
+        background={Colors.sand}
+        foregroundPrev={Colors.wetSand}
+      />
     </LandingScreen>
   );
 }
