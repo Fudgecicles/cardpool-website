@@ -114,6 +114,7 @@ function Banner() {
         foreground={Colors.blue}
         background={Colors.sand}
         foregroundPrev={Colors.wetSand}
+        drawFoamLine
       />
     </LandingScreen>
   );
