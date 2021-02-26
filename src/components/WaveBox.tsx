@@ -36,12 +36,11 @@ const WaveBox: React.FC<ComponentProps> = (props: ComponentProps) => {
     p5.createCanvas(windowWidth, 100).parent(canvasParentRef);
   };
 
-  const drawWave = (p5: p5Types, currentTime: number, heightOffset: number) => {
+  const drawWave = (p5: p5Types, currentTime: number) => {
     let waveX = 0;
     let currentHeight =
       p5.height / 2 +
-      p5.sin(currentTime * 0.001) * (p5.height / 4) +
-      heightOffset;
+      p5.sin(currentTime * 0.001) * (p5.height / 4)
     p5.beginShape();
     if (props.upright) {
       p5.vertex(p5.width / 2, p5.height);
@@ -89,10 +88,10 @@ const WaveBox: React.FC<ComponentProps> = (props: ComponentProps) => {
     p5.noiseDetail(2, 0.2);
 
     p5.fill(p5.color(props.foregroundPrev));
-    drawWave(p5, p5.millis() - 1000, 0);
+    drawWave(p5, p5.millis() - 1000);
 
     p5.fill(p5.color(props.foreground));
-    drawWave(p5, p5.millis(), 0);
+    drawWave(p5, p5.millis());
   };
 
   return <Sketch setup={setup} draw={draw} />;
