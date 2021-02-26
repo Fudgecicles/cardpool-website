@@ -1,6 +1,6 @@
 import React from "react";
 import Feature from "../Feature";
-import pay from "../../assets/pay.png";
+import pay from "../../assets/credit.png";
 import PoolText from "../PoolText";
 import CardText from "../CardText";
 

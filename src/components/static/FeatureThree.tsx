@@ -16,8 +16,8 @@ function FeatureThree() {
       paragraph={
         <>
           No one wants to figure out the dinner bill - so we made it easy. Use
-          our tools to quickly create groups, itemize the purchase, and
-          calculate who owes what.
+          our tools to quickly create groups, itemize the purchase, and asign
+          items.
         </>
       }
       image={tools}

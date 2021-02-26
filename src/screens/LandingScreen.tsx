@@ -5,15 +5,16 @@ import Team from "../components/Team";
 import Footer from "../components/Footer";
 import Navbar from "../components/Navbar";
 import Banner from "../components/Banner";
-import Container from "react-bootstrap/Container";
 import styled from "styled-components";
 import Colors from "../config/Colors";
 
 import React, { useRef } from "react";
+import FeatureFour from "../components/static/FeatureFour";
 
 const FeatureContainer = styled.div`
   background-color: ${Colors.sand};
   display: flex;
+  flex-direction: column;
   padding-top: 100px;
   width: 100%;
   margin-left: auto;
@@ -34,12 +35,12 @@ function LandingScreen() {
       <Navbar about={aboutRef} team={teamRef} />
       <Banner />
       <FeatureContainer ref={aboutRef as any} id="about">
-        <Container>
-          <CenteredText>A modern way to split payments</CenteredText>
-          <FeatureOne />
-          <FeatureTwo />
-          <FeatureThree />
-        </Container>
+        <CenteredText>A modern way to split payments</CenteredText>
+        <FeatureOne />
+        <FeatureTwo />
+        <FeatureThree />
+
+        <FeatureFour />
       </FeatureContainer>
       <Team ref={teamRef as any} />
       <Footer />

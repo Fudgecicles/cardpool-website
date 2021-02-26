@@ -1,12 +1,19 @@
 import React, { FunctionComponent } from "react";
+import { Container } from "react-bootstrap";
 import styled from "styled-components";
 import useIsMobile from "../hooks/UseIsMobile";
 
-const CardContainer = styled.div<StyleProps>`
+const CardBackground = styled.div<LayoutProps>`
+  width: 100%;
+
+  padding-top: 50px;
+  padding-bottom: 50px;
+  background-color: ${(props) => props.backgroundColor};
+`;
+
+const CardLayout = styled.div<LayoutProps>`
   width: 100%;
   display: flex;
-  margin-top: 25px;
-  margin-bottom: 25px;
   flex-direction: ${(props) =>
     props.mobile
       ? "column"
@@ -19,22 +26,28 @@ const CardContainer = styled.div<StyleProps>`
 `;
 
 const TextContainer = styled.div<LayoutProps>`
-  width: ${(props) => (props.mobile ? "100%" : "60%")};
+  width: ${(props) => (props.mobile ? "100%" : "50%")};
+  margin-left: ${(props) =>
+    props.mobile ? "0" : props.alignment == "left" ? "0" : "50px"};
+  margin-right: ${(props) =>
+    props.mobile ? "0" : props.alignment == "left" ? "50px" : "0px"};
   display: flex;
   flex-direction: column;
   justify-content: center;
 `;
 
-const ImageContainer = styled.div`
-  width: 300px;
+const ImageContainer = styled.div<LayoutProps>`
+  width: 50%;
   display: flex;
   flex-direction: column;
   justify-content: center;
+  margin-left: ${(props) =>
+    props.mobile ? "0" : props.alignment == "left" ? "50px" : "0"};
+  margin-right: ${(props) =>
+    props.mobile ? "0" : props.alignment == "left" ? "0" : "50px"};
 `;
 
 const StyledImage = styled.img`
-  margin-left: 50px;
-  margin-right: 50px;
   height: 100%;
   object-fit: scale-down;
 `;
@@ -44,34 +57,46 @@ type FeatureProps = {
   header: React.ReactNode;
   paragraph: React.ReactNode;
   image: string;
-};
-
-type StyleProps = {
-  alignment: string;
-  mobile: boolean;
+  backgroundColor?: string;
 };
 
 type LayoutProps = {
+  alignment: string;
+  backgroundColor?: string;
   mobile: boolean;
 };
 
 const StyledText = styled.p`
-  font-size: 20px;
+  font-size: 22px;
 `;
 
 const Feature: FunctionComponent<FeatureProps> = (props) => {
   const mobile = useIsMobile();
 
   return (
-    <CardContainer id="about" mobile={mobile} alignment={props.alignment}>
-      <TextContainer mobile={mobile}>
-        <h3>{props.header}</h3>
-        <StyledText>{props.paragraph}</StyledText>
-      </TextContainer>
-      <ImageContainer>
-        <StyledImage src={props.image} />
-      </ImageContainer>
-    </CardContainer>
+    <CardBackground
+      id="about"
+      backgroundColor={props.backgroundColor}
+      mobile={mobile}
+      alignment={props.alignment}
+    >
+      <Container>
+        <CardLayout
+          id="about"
+          backgroundColor={props.backgroundColor}
+          mobile={mobile}
+          alignment={props.alignment}
+        >
+          <TextContainer alignment={props.alignment} mobile={mobile}>
+            <h3>{props.header}</h3>
+            <StyledText>{props.paragraph}</StyledText>
+          </TextContainer>
+          <ImageContainer mobile={mobile} alignment={props.alignment}>
+            <StyledImage src={props.image} />
+          </ImageContainer>
+        </CardLayout>
+      </Container>
+    </CardBackground>
   );
 };
 

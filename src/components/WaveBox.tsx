@@ -13,12 +13,12 @@ interface ComponentProps {
 }
 
 const WaveBox: React.FC<ComponentProps> = (props: ComponentProps) => {
-  const [windowWidth, setwindowWidth] = useState(window.outerWidth);
+  const [windowWidth, setwindowWidth] = useState(window.innerWidth);
   const [resizeOccurred, setResizeOccurred] = useState(false);
 
   useEffect(() => {
     function handleResize() {
-      setwindowWidth(window.outerWidth);
+      setwindowWidth(window.innerWidth);
       setResizeOccurred(true);
     }
 
@@ -75,13 +75,15 @@ const WaveBox: React.FC<ComponentProps> = (props: ComponentProps) => {
 
   const draw = (p5: p5Types) => {
     // Not sure why but sometimes it doesn't update and this catches that
-    if (windowWidth != window.outerWidth) {
-      setwindowWidth(window.outerWidth);
+    if (windowWidth != window.innerWidth) {
+      setwindowWidth(window.innerWidth);
       setResizeOccurred(true);
     }
     // resize canvas if resize occurred (I tried the built in windowResized and it was worse)
     if (resizeOccurred) {
-      p5.resizeCanvas(windowWidth, 100);
+      // I have no fucking idea where the 17 comes from,
+      // but otherwise the canvas would extend off the screen and cause a horizontal scroll to appear
+      p5.resizeCanvas(windowWidth - 17, 100);
       setResizeOccurred(false);
     }
     //Draw the wave
