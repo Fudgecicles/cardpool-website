@@ -1,5 +1,4 @@
 import React, { FunctionComponent } from "react";
-import { Container } from "react-bootstrap";
 import styled from "styled-components";
 import useIsMobile from "../hooks/UseIsMobile";
 
@@ -9,9 +8,6 @@ const CardBackground = styled.div<LayoutProps>`
   padding-top: 50px;
   padding-bottom: 50px;
   background-color: ${(props) => props.backgroundColor};
-`;
-
-const CardLayout = styled.div<LayoutProps>`
   width: 100%;
   display: flex;
   flex-direction: ${(props) =>
@@ -28,9 +24,9 @@ const CardLayout = styled.div<LayoutProps>`
 const TextContainer = styled.div<LayoutProps>`
   width: ${(props) => (props.mobile ? "100%" : "50%")};
   margin-left: ${(props) =>
-    props.mobile ? "0" : props.alignment == "left" ? "0" : "50px"};
+    props.mobile ? "0" : props.alignment === "left" ? "0" : "50px"};
   margin-right: ${(props) =>
-    props.mobile ? "0" : props.alignment == "left" ? "50px" : "0px"};
+    props.mobile ? "0" : props.alignment === "left" ? "50px" : "0px"};
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -42,9 +38,9 @@ const ImageContainer = styled.div<LayoutProps>`
   flex-direction: column;
   justify-content: center;
   margin-left: ${(props) =>
-    props.mobile ? "0" : props.alignment == "left" ? "50px" : "0"};
+    props.mobile ? "0" : props.alignment === "left" ? "50px" : "0"};
   margin-right: ${(props) =>
-    props.mobile ? "0" : props.alignment == "left" ? "0" : "50px"};
+    props.mobile ? "0" : props.alignment === "left" ? "0" : "50px"};
 `;
 
 const StyledImage = styled.img`
@@ -80,22 +76,13 @@ const Feature: FunctionComponent<FeatureProps> = (props) => {
       mobile={mobile}
       alignment={props.alignment}
     >
-      <Container>
-        <CardLayout
-          id="about"
-          backgroundColor={props.backgroundColor}
-          mobile={mobile}
-          alignment={props.alignment}
-        >
-          <TextContainer alignment={props.alignment} mobile={mobile}>
-            <h3>{props.header}</h3>
-            <StyledText>{props.paragraph}</StyledText>
-          </TextContainer>
-          <ImageContainer mobile={mobile} alignment={props.alignment}>
-            <StyledImage src={props.image} />
-          </ImageContainer>
-        </CardLayout>
-      </Container>
+      <TextContainer alignment={props.alignment} mobile={mobile}>
+        <h3>{props.header}</h3>
+        <StyledText>{props.paragraph}</StyledText>
+      </TextContainer>
+      <ImageContainer mobile={mobile} alignment={props.alignment}>
+        <StyledImage src={props.image} />
+      </ImageContainer>
     </CardBackground>
   );
 };

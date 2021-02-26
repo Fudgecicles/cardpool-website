@@ -10,6 +10,7 @@ import Colors from "../config/Colors";
 
 import React, { useRef } from "react";
 import FeatureFour from "../components/static/FeatureFour";
+import { Container } from "react-bootstrap";
 
 const FeatureContainer = styled.div`
   background-color: ${Colors.sand};
@@ -35,11 +36,13 @@ function LandingScreen() {
       <Navbar about={aboutRef} team={teamRef} />
       <Banner />
       <FeatureContainer ref={aboutRef as any} id="about">
-        <CenteredText>A modern way to split payments</CenteredText>
-        <FeatureOne />
-        <FeatureFour />
-        <FeatureThree />
-        <FeatureTwo />
+        <Container>
+          <CenteredText>A modern way to split payments</CenteredText>
+          <FeatureOne />
+          <FeatureFour />
+          <FeatureThree />
+          <FeatureTwo />
+        </Container>
       </FeatureContainer>
       <Team ref={teamRef as any} />
       <Footer />
