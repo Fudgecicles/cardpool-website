@@ -43,7 +43,7 @@ function Footer() {
         <FooterLayout>
           <Column>
             <h1>
-              <LogoText clickable></LogoText>
+              <LogoText displayLogoImage clickable></LogoText>
             </h1>
             <p>Copyright 2021</p>
           </Column>

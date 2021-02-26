@@ -79,7 +79,7 @@ const Navbar: FunctionComponent<NavbarProps> = (props) => {
       <Container>
         <StyledNavbar expand="lg">
           <StyledBrand>
-            <LogoText clickable />
+            <LogoText clickable displayLogoImage />
           </StyledBrand>
           <NavbarBs.Toggle aria-controls="basic-navbar-nav" />
           <StyledCollapse id="basic-navbar-nav">
