@@ -67,9 +67,9 @@ const Team = React.forwardRef<HTMLDivElement>((_props, ref) => {
     <>
       <WaveBox
         upright={true}
-        foreground={Colors.blue}
-        background={Colors.sand}
-        foregroundPrev={Colors.wetSand}
+        waterColor={Colors.blue}
+        sandColor={Colors.sand}
+        wetSandColor={Colors.wetSand}
       />
       <TeamBackground ref={ref}>
         <Container>

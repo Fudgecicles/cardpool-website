@@ -111,9 +111,9 @@ function Banner() {
       </Container>
       <WaveBox
         upright={false}
-        foreground={Colors.blue}
-        background={Colors.sand}
-        foregroundPrev={Colors.wetSand}
+        waterColor={Colors.blue}
+        sandColor={Colors.sand}
+        wetSandColor={Colors.wetSand}
       />
     </LandingScreen>
   );
