@@ -15,9 +15,9 @@ function FeatureFour() {
       }
       paragraph={
         <>
-          Someone else paying with your money does not mean someone else has
-          your money. If an unauthorized purchase is made with our card, deny it
-          and we'll return all your funds, no questions asked.
+          We've made sure instant split payments cannot be abused. If a friend
+          makes an unauthorized purchase with our card, deny it and we'll return
+          all your funds, no questions asked.
         </>
       }
       image={control}

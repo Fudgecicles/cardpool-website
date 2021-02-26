@@ -37,10 +37,9 @@ function LandingScreen() {
       <FeatureContainer ref={aboutRef as any} id="about">
         <CenteredText>A modern way to split payments</CenteredText>
         <FeatureOne />
-        <FeatureTwo />
-        <FeatureThree />
-
         <FeatureFour />
+        <FeatureThree />
+        <FeatureTwo />
       </FeatureContainer>
       <Team ref={teamRef as any} />
       <Footer />
