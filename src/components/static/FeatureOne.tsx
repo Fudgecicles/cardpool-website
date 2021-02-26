@@ -18,7 +18,7 @@ function FeatureOne() {
         <>
           {" "}
           Use our card at checkout and instantly split your purchase. Never
-          front a payment, manually split a transaction, or figure out who pays
+          front a payment, manually split a transaction or figure out who pays
           what ever again.
         </>
       }
