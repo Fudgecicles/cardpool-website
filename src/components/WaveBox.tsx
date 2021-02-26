@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import Sketch from "react-p5";
 import p5Types from "p5"; //Import this for typechecking and intellisense
 import Colors from "../config/Colors";
@@ -13,8 +13,9 @@ interface ComponentProps {
 }
 
 const WaveBox: React.FC<ComponentProps> = (props: ComponentProps) => {
-	const [windowWidth, setwindowWidth] = useState(window.outerWidth);
+	const [windowWidth, setwindowWidth] = useState(window.innerWidth);
 	const [resizeOccurred, setResizeOccurred] = useState(false);
+	const ref = useRef<Element>();
 
 	interface decayPoint {
 		x:number;
@@ -33,11 +34,11 @@ const WaveBox: React.FC<ComponentProps> = (props: ComponentProps) => {
 	var sandData:number[] = new Array(n);
 	var decayPoints:decayPoint[] = new Array(0);
 
-	useEffect(() => {
-	function handleResize() {
-		setwindowWidth(window.outerWidth);
-		setResizeOccurred(true);
-	}
+
+  useEffect(() => {
+    function handleResize() {
+      setResizeOccurred(true);
+    }
 
 	window.addEventListener("resize", handleResize);
 	window.addEventListener("fullscreenchange", handleResize);
@@ -50,12 +51,12 @@ const WaveBox: React.FC<ComponentProps> = (props: ComponentProps) => {
 
   //See annotations in JS for more information
   const setup = (p5: p5Types, canvasParentRef: Element) => {
-    p5.createCanvas(windowWidth, 100).parent(canvasParentRef);
+    ref.current = canvasParentRef;
+    p5.createCanvas(canvasParentRef.clientWidth, 100).parent(canvasParentRef);
 	for(let i = 0; i < n; i++){
 		sandData[i] = props.upright ? p5.height : 0;
 		wetDecayRate[i] = 0;
-	}
-  };
+	}  };
 
   const getWaveData = (p5: p5Types, currentTime: number):number[]  => {
 	var wavePoints:number[] = new Array(n);
@@ -100,13 +101,15 @@ const WaveBox: React.FC<ComponentProps> = (props: ComponentProps) => {
 
   const draw = (p5: p5Types) => {
     // Not sure why but sometimes it doesn't update and this catches that
-    if (windowWidth != window.outerWidth) {
-      setwindowWidth(window.outerWidth);
+    if (windowWidth !== window.innerWidth) {
+      setwindowWidth(window.innerWidth);
       setResizeOccurred(true);
     }
     // resize canvas if resize occurred (I tried the built in windowResized and it was worse)
     if (resizeOccurred) {
-      p5.resizeCanvas(windowWidth, 100);
+      // I have no fucking idea where the 17 comes from,
+      // but otherwise the canvas would extend off the screen and cause a horizontal scroll to appear
+      p5.resizeCanvas(ref.current?.clientWidth ?? windowWidth, 100);
       setResizeOccurred(false);
     }
     //Draw the wave

@@ -1,6 +1,6 @@
 import React from "react";
 import Feature from "../Feature";
-import credit from "../../assets/credit.png";
+import credit from "../../assets/pay.png";
 import PoolText from "../PoolText";
 import CardText from "../CardText";
 
@@ -15,7 +15,7 @@ function FeatureTwo() {
       }
       paragraph={
         <>
-          Avoid awkward IOU's when you can't pay someone pack. Let us spot you
+          Avoid awkward IOU's when you can't pay someone back. Let us spot you
           the cash and we'll help you build your credit score along the way.
         </>
       }

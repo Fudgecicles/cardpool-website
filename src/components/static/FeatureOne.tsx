@@ -1,6 +1,6 @@
 import React from "react";
 import Feature from "../Feature";
-import pay from "../../assets/pay.png";
+import pay from "../../assets/credit.png";
 import PoolText from "../PoolText";
 import CardText from "../CardText";
 
@@ -18,7 +18,7 @@ function FeatureOne() {
         <>
           {" "}
           Use our card at checkout and instantly split your purchase. Never
-          front a payment, manually split a transaction, or figure out who pays
+          front a payment, manually split a transaction or figure out who pays
           what ever again.
         </>
       }
