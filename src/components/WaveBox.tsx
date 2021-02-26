@@ -85,7 +85,6 @@ const WaveBox: React.FC<ComponentProps> = (props: ComponentProps) => {
       // I have no fucking idea where the 17 comes from,
       // but otherwise the canvas would extend off the screen and cause a horizontal scroll to appear
       p5.resizeCanvas(ref.current?.clientWidth ?? windowWidth, 100);
-      console.log(ref.current?.clientWidth);
       setResizeOccurred(false);
     }
     //Draw the wave
