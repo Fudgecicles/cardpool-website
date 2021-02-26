@@ -70,7 +70,6 @@ const Team = React.forwardRef<HTMLDivElement>((_props, ref) => {
         foreground={Colors.blue}
         background={Colors.sand}
         foregroundPrev={Colors.wetSand}
-        drawFoamLine
       />
       <TeamBackground ref={ref}>
         <Container>

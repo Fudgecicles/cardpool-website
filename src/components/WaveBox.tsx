@@ -9,7 +9,6 @@ interface ComponentProps {
   foreground: string;
   foregroundPrev: string;
   background: string;
-  drawFoamLine?: boolean;
 }
 
 const WaveBox: React.FC<ComponentProps> = (props: ComponentProps) => {
@@ -91,10 +90,6 @@ const WaveBox: React.FC<ComponentProps> = (props: ComponentProps) => {
 
     p5.fill(p5.color(props.foregroundPrev));
     drawWave(p5, p5.millis() - 1000, 0);
-    if (props.drawFoamLine) {
-      p5.fill(p5.color(Colors.white));
-      drawWave(p5, p5.millis(), 5 * (props.upright ? -1 : 1));
-    }
 
     p5.fill(p5.color(props.foreground));
     drawWave(p5, p5.millis(), 0);
