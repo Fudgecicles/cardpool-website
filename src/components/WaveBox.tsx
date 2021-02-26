@@ -3,6 +3,7 @@ import Sketch from "react-p5";
 import p5Types from "p5"; //Import this for typechecking and intellisense
 import Colors from "../config/Colors";
 import { spawn } from "child_process";
+import { isEmptyBindingElement } from "typescript";
 
 interface ComponentProps {
   //Your component props
@@ -17,22 +18,15 @@ const WaveBox: React.FC<ComponentProps> = (props: ComponentProps) => {
 	const [resizeOccurred, setResizeOccurred] = useState(false);
 	const ref = useRef<Element>();
 
-	interface decayPoint {
-		x:number;
-		y:number;
-		decayRate:number;
-		diameter:number;
-	}
-
 	const n = 10;
 	const pointMinRadius = 4;
-	const pointMaxRadius = 20;
-	const pointSpawnRateMin = 2;
-	const pointSpawnRateMax = 4;
+	const pointMaxRadius = 10;
+	const pointSpawnRateMin = 1;
+	const pointSpawnRateMax = 2;
 	const wetDecayAcceleration = 0.0001;
-	var wetDecayRate:number[] = new Array(n);
-	var sandData:number[] = new Array(n);
-	var decayPoints:decayPoint[] = new Array(0);
+	let wetDecayRate = new Array(n);
+	let sandData = new Array(n);
+	let decayPoints = new Array(0);
 
 
   useEffect(() => {
@@ -49,14 +43,15 @@ const WaveBox: React.FC<ComponentProps> = (props: ComponentProps) => {
 	}, []);
 
 
-  //See annotations in JS for more information
-  const setup = (p5: p5Types, canvasParentRef: Element) => {
-    ref.current = canvasParentRef;
-    p5.createCanvas(canvasParentRef.clientWidth, 100).parent(canvasParentRef);
-	for(let i = 0; i < n; i++){
-		sandData[i] = props.upright ? p5.height : 0;
-		wetDecayRate[i] = 0;
-	}  };
+  	//See annotations in JS for more information
+	const setup = (p5: p5Types, canvasParentRef: Element) => {
+		ref.current = canvasParentRef;
+		p5.createCanvas(canvasParentRef.clientWidth, 100).parent(canvasParentRef);
+		for(let i = 0; i < n; i++) {
+			sandData[i] = props.upright ? p5.height : 0;
+			wetDecayRate[i] = 0;
+		}
+	};
 
   const getWaveData = (p5: p5Types, currentTime: number):number[]  => {
 	var wavePoints:number[] = new Array(n);
@@ -110,6 +105,12 @@ const WaveBox: React.FC<ComponentProps> = (props: ComponentProps) => {
       // I have no fucking idea where the 17 comes from,
       // but otherwise the canvas would extend off the screen and cause a horizontal scroll to appear
       p5.resizeCanvas(ref.current?.clientWidth ?? windowWidth, 100);
+	  decayPoints = [];
+	  sandData = [n]
+	  for(let i = 0; i < n; i++) {
+		sandData[i] = props.upright ? p5.height : 0;
+		wetDecayRate[i] = 0;
+	}
       setResizeOccurred(false);
     }
     //Draw the wave
@@ -120,7 +121,13 @@ const WaveBox: React.FC<ComponentProps> = (props: ComponentProps) => {
 	let waveData = getWaveData(p5, p5.millis());
 
 	//Update sand wetness
-	for(let i = 0; i < waveData.length; i++){
+	for(let i = 0; i < n; i++){
+		if(sandData[i] == undefined || isNaN(sandData[i])){
+			sandData[i] = props.upright ? p5.height : 0;
+		}
+		if(isNaN(wetDecayRate[i])){
+			wetDecayRate[i] = 0;
+		}
 		wetDecayRate[i] += wetDecayAcceleration * (props.upright ? 1.0 : -1.0 );
 		sandData[i] += wetDecayRate[i] * p5.deltaTime;
 		
@@ -145,13 +152,13 @@ const WaveBox: React.FC<ComponentProps> = (props: ComponentProps) => {
 	let numToSpawn = p5.random(pointSpawnRateMin, pointSpawnRateMax);
 	for(let j = 0; j < numToSpawn; j++){
 		let spawnX = p5.random(0, p5.width);
-		let WaveSpaceX = (spawnX / p5.width) * n;
+		let WaveSpaceX = (spawnX / p5.width) * (n-1);
 		let indexA = p5.floor(WaveSpaceX);
 		let indexB = p5.ceil(WaveSpaceX);
 		let percentAB = (WaveSpaceX - indexA) / (indexB - indexA);
 		let spawnY = p5.lerp(sandData[indexA], sandData[indexB], percentAB);
 		let diameter = p5.random(pointMinRadius, pointMaxRadius);
-		decayPoints.push({x:spawnX, y:(spawnY + diameter * (props.upright ? 2.0 : -2.0)), decayRate:0, diameter:diameter});
+		decayPoints.push({x:spawnX, y:(spawnY + diameter * (props.upright ? 1.0 : -1.0)), decayRate:0, diameter:diameter});
 	}
 
 	//draw wet sand
