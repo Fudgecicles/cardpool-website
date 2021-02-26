@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import Sketch from "react-p5";
 import p5Types from "p5"; //Import this for typechecking and intellisense
 import Colors from "../config/Colors";
+import { spawn } from "child_process";
 
 interface ComponentProps {
   //Your component props
@@ -12,27 +13,40 @@ interface ComponentProps {
 }
 
 const WaveBox: React.FC<ComponentProps> = (props: ComponentProps) => {
-  const [windowWidth, setwindowWidth] = useState(window.outerWidth);
-  const [resizeOccurred, setResizeOccurred] = useState(false);
+	const [windowWidth, setwindowWidth] = useState(window.outerWidth);
+	const [resizeOccurred, setResizeOccurred] = useState(false);
 
-  useEffect(() => {
-    function handleResize() {
-      setwindowWidth(window.outerWidth);
-      setResizeOccurred(true);
-    }
+	interface decayPoint {
+		x:number;
+		y:number;
+		decayRate:number;
+		diameter:number;
+	}
 
-    window.addEventListener("resize", handleResize);
-    window.addEventListener("fullscreenchange", handleResize);
-    return () => {
-      window.removeEventListener("resize", handleResize);
-      window.removeEventListener("fullscreenchange", handleResize);
-    };
-  }, []);
+	const n = 10;
+	const pointMinRadius = 4;
+	const pointMaxRadius = 20;
+	const pointSpawnRateMin = 2;
+	const pointSpawnRateMax = 4;
+	const wetDecayAcceleration = 0.0001;
+	var wetDecayRate:number[] = new Array(n);
+	var sandData:number[] = new Array(n);
+	var decayPoints:decayPoint[] = new Array(0);
 
-  const n = 10;
-  const wetDecayAcceleration = 0.0001;
-  var wetDecayRate:number[] = new Array(n);
-  var sandData:number[] = new Array(n);
+	useEffect(() => {
+	function handleResize() {
+		setwindowWidth(window.outerWidth);
+		setResizeOccurred(true);
+	}
+
+	window.addEventListener("resize", handleResize);
+	window.addEventListener("fullscreenchange", handleResize);
+	return () => {
+		window.removeEventListener("resize", handleResize);
+		window.removeEventListener("fullscreenchange", handleResize);
+	};
+	}, []);
+
 
   //See annotations in JS for more information
   const setup = (p5: p5Types, canvasParentRef: Element) => {
@@ -113,9 +127,42 @@ const WaveBox: React.FC<ComponentProps> = (props: ComponentProps) => {
 		}
 	}
 
-    p5.fill(p5.color(props.wetSandColor));
+	//Update wetness points decay
+	for(let i = 0; i < decayPoints.length; i++){
+		decayPoints[i].decayRate += wetDecayAcceleration * 0.5 * p5.deltaTime;
+		decayPoints[i].diameter -= decayPoints[i].decayRate
+
+		if(decayPoints[i].diameter<=0){
+			decayPoints.splice(i,1);
+			i--;
+		}
+	}
+
+	//spawn wetness points
+	let numToSpawn = p5.random(pointSpawnRateMin, pointSpawnRateMax);
+	for(let j = 0; j < numToSpawn; j++){
+		let spawnX = p5.random(0, p5.width);
+		let WaveSpaceX = (spawnX / p5.width) * n;
+		let indexA = p5.floor(WaveSpaceX);
+		let indexB = p5.ceil(WaveSpaceX);
+		let percentAB = (WaveSpaceX - indexA) / (indexB - indexA);
+		let spawnY = p5.lerp(sandData[indexA], sandData[indexB], percentAB);
+		let diameter = p5.random(pointMinRadius, pointMaxRadius);
+		decayPoints.push({x:spawnX, y:(spawnY + diameter * (props.upright ? 2.0 : -2.0)), decayRate:0, diameter:diameter});
+	}
+
+	//draw wet sand
+	p5.fill(p5.color(props.wetSandColor));
+
+	//draw wet decay points
+	for(let i = 0; i < decayPoints.length; i++){
+		p5.circle(decayPoints[i].x, decayPoints[i].y,decayPoints[i].diameter);
+	}
+
+	//draw wet sand border
     drawWave(p5, sandData);
 
+	//draw wave
     p5.fill(p5.color(props.waterColor));
     drawWave(p5, waveData);
   };
