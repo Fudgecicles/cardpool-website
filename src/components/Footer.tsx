@@ -45,7 +45,6 @@ function Footer() {
             <h1>
               <LogoText displayLogoImage clickable></LogoText>
             </h1>
-            <p>Copyright 2021</p>
           </Column>
           <Column>
             <Links onClick={scrollToTop}>Sign Up</Links>
