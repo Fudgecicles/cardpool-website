@@ -44,7 +44,8 @@ const ImageContainer = styled.div<LayoutProps>`
 `;
 
 const StyledImage = styled.img`
-  height: 100%;
+  width: 100%;
+  height: auto;
   object-fit: scale-down;
 `;
 
