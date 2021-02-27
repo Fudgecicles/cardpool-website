@@ -49,7 +49,7 @@ function Footer() {
           </Column>
           <Column>
             <Links onClick={scrollToTop}>Sign Up</Links>
-            <Links href="mailto:listeven@alumni.usc.edu">Get In Contact</Links>
+            <Links href="mailto:listeven@alumni.usc.edu">Contact</Links>
           </Column>
         </FooterLayout>
       </Container>
